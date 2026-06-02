@@ -5,6 +5,7 @@ import { createAppointment, fetchServices } from '@/services/bookingService'
 import { TIME_SLOTS } from '@/lib/constants'
 import type { Service } from '@/types/database'
 import { formatCurrency } from '@/lib/utils'
+import { BookingStickyActions } from '@/components/booking/BookingStickyActions'
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
 
@@ -90,14 +91,14 @@ export function ReviewStep({
         </p>
       ) : null}
 
-      <div className="sticky bottom-20 mt-8 flex gap-3 md:bottom-4">
+      <BookingStickyActions className="flex gap-3">
         <Button variant="outline" className="flex-1" size="lg" onClick={onBack} disabled={submitting}>
           Edit
         </Button>
-        <Button className="flex-1" size="lg" loading={submitting} onClick={handleSubmit}>
+        <Button className="flex-1" size="lg" solidDisabled loading={submitting} onClick={handleSubmit}>
           Confirm booking
         </Button>
-      </div>
+      </BookingStickyActions>
     </div>
   )
 }

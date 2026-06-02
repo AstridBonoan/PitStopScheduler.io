@@ -3,6 +3,7 @@ import { useBooking } from '@/contexts/BookingContext'
 import { getAvailableSlots } from '@/services/bookingService'
 import type { TimeSlot } from '@/lib/constants'
 import { cn } from '@/lib/utils'
+import { BookingStickyActions } from '@/components/booking/BookingStickyActions'
 import { Button } from '@/components/ui/Button'
 
 export function TimeStep({ onNext, onBack }: { onNext: () => void; onBack: () => void }) {
@@ -49,14 +50,14 @@ export function TimeStep({ onNext, onBack }: { onNext: () => void; onBack: () =>
         )}
       </div>
 
-      <div className="sticky bottom-20 mt-8 flex gap-3 md:bottom-4">
+      <BookingStickyActions className="flex gap-3">
         <Button variant="outline" className="flex-1" size="lg" onClick={onBack}>
           Back
         </Button>
-        <Button className="flex-1" size="lg" disabled={!draft.time} onClick={onNext}>
+        <Button className="flex-1" size="lg" solidDisabled disabled={!draft.time} onClick={onNext}>
           Continue
         </Button>
-      </div>
+      </BookingStickyActions>
     </div>
   )
 }

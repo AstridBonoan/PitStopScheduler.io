@@ -5,6 +5,7 @@ import type { Service } from '@/types/database'
 import { fetchServices } from '@/services/bookingService'
 import { useBooking } from '@/contexts/BookingContext'
 import { formatCurrency, cn } from '@/lib/utils'
+import { BookingStickyActions } from '@/components/booking/BookingStickyActions'
 import { Button } from '@/components/ui/Button'
 
 export function ServiceStep({ onNext }: { onNext: () => void }) {
@@ -63,11 +64,11 @@ export function ServiceStep({ onNext }: { onNext: () => void }) {
         )}
       </div>
 
-      <div className="sticky bottom-20 mt-8 md:bottom-4">
-        <Button className="w-full" size="lg" disabled={!draft.serviceId} onClick={onNext}>
+      <BookingStickyActions>
+        <Button className="w-full" size="lg" solidDisabled disabled={!draft.serviceId} onClick={onNext}>
           Continue
         </Button>
-      </div>
+      </BookingStickyActions>
     </div>
   )
 }

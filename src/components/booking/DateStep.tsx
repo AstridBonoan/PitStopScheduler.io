@@ -15,6 +15,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { useBooking } from '@/contexts/BookingContext'
 import { fetchBlockedDates, fetchHolidays, isDateBookable } from '@/services/bookingService'
 import { cn } from '@/lib/utils'
+import { BookingStickyActions } from '@/components/booking/BookingStickyActions'
 import { Button } from '@/components/ui/Button'
 
 export function DateStep({ onNext, onBack }: { onNext: () => void; onBack: () => void }) {
@@ -102,14 +103,14 @@ export function DateStep({ onNext, onBack }: { onNext: () => void; onBack: () =>
         </div>
       </div>
 
-      <div className="sticky bottom-20 mt-8 flex gap-3 md:bottom-4">
+      <BookingStickyActions className="flex gap-3">
         <Button variant="outline" className="flex-1" size="lg" onClick={onBack}>
           Back
         </Button>
-        <Button className="flex-1" size="lg" disabled={!draft.date} onClick={onNext}>
+        <Button className="flex-1" size="lg" solidDisabled disabled={!draft.date} onClick={onNext}>
           Continue
         </Button>
-      </div>
+      </BookingStickyActions>
     </div>
   )
 }

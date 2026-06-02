@@ -10,6 +10,11 @@
   --color-surface: #ffffff;
   --color-muted: #64748b;
   --color-border: #e2e8f0;
+  /* Bottom nav: py-2 + 52px row + safe area + breathing room above nav */
+  --bottom-nav-height: 4.5rem;
+  --booking-actions-bottom: calc(
+    var(--bottom-nav-height) + env(safe-area-inset-bottom, 0px) + 0.5rem
+  );
 }
 
 @layer base {
@@ -28,6 +33,6 @@
 
 @layer utilities {
   .safe-bottom {
-    padding-bottom: env(safe-area-inset-bottom, 0);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
   }
 }

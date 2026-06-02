@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { useBooking } from '@/contexts/BookingContext'
 import { vehicleSchema, type VehicleFormData } from '@/lib/validators'
 import { Input } from '@/components/ui/Input'
+import { BookingStickyActions } from '@/components/booking/BookingStickyActions'
 import { Button } from '@/components/ui/Button'
 
 export function VehicleStep({ onNext, onBack }: { onNext: () => void; onBack: () => void }) {
@@ -53,14 +54,14 @@ export function VehicleStep({ onNext, onBack }: { onNext: () => void; onBack: ()
         />
       </div>
 
-      <div className="sticky bottom-20 mt-8 flex gap-3 md:bottom-4">
+      <BookingStickyActions className="flex gap-3">
         <Button type="button" variant="outline" className="flex-1" size="lg" onClick={onBack}>
           Back
         </Button>
-        <Button type="submit" className="flex-1" size="lg">
+        <Button type="submit" className="flex-1" size="lg" solidDisabled>
           Continue
         </Button>
-      </div>
+      </BookingStickyActions>
     </form>
   )
 }

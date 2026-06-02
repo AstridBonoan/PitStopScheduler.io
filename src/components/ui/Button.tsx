@@ -8,6 +8,8 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: Variant
   size?: Size
   loading?: boolean
+  /** Disabled state stays opaque (booking CTAs) */
+  solidDisabled?: boolean
 }
 
 const variants: Record<Variant, string> = {
@@ -25,12 +27,14 @@ const sizes: Record<Size, string> = {
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = 'primary', size = 'md', loading, disabled, children, ...props }, ref) => (
+  ({ className, variant = 'primary', size = 'md', loading, disabled, solidDisabled, children, ...props }, ref) => (
     <button
       ref={ref}
       disabled={disabled || loading}
       className={cn(
-        'inline-flex items-center justify-center gap-2 font-semibold transition-colors disabled:opacity-50 disabled:pointer-events-none',
+        'inline-flex items-center justify-center gap-2 font-semibold transition-colors disabled:pointer-events-none',
+        'disabled:opacity-50',
+        solidDisabled && 'disabled:opacity-100 disabled:bg-slate-300 disabled:text-slate-600',
         variants[variant],
         sizes[size],
         className,
