@@ -3,6 +3,7 @@ import { useBooking } from '@/contexts/BookingContext'
 import { getAvailableSlots } from '@/services/bookingService'
 import type { TimeSlot } from '@/lib/constants'
 import { cn } from '@/lib/utils'
+import { BookingStepShell } from '@/components/booking/BookingStepShell'
 import { BookingStickyActions } from '@/components/booking/BookingStickyActions'
 import { Button } from '@/components/ui/Button'
 
@@ -20,7 +21,18 @@ export function TimeStep({ onNext, onBack }: { onNext: () => void; onBack: () =>
   }, [draft.date])
 
   return (
-    <div>
+    <BookingStepShell
+      actions={
+        <BookingStickyActions className="flex gap-3">
+          <Button variant="outline" className="flex-1" size="lg" onClick={onBack}>
+            Back
+          </Button>
+          <Button className="flex-1" size="lg" solidDisabled disabled={!draft.time} onClick={onNext}>
+            Continue
+          </Button>
+        </BookingStickyActions>
+      }
+    >
       <h1 className="text-2xl font-bold text-slate-900">Pick a time</h1>
       <p className="mt-1 text-slate-500">Available slots update in real time.</p>
 
@@ -49,15 +61,6 @@ export function TimeStep({ onNext, onBack }: { onNext: () => void; onBack: () =>
           ))
         )}
       </div>
-
-      <BookingStickyActions className="flex gap-3">
-        <Button variant="outline" className="flex-1" size="lg" onClick={onBack}>
-          Back
-        </Button>
-        <Button className="flex-1" size="lg" solidDisabled disabled={!draft.time} onClick={onNext}>
-          Continue
-        </Button>
-      </BookingStickyActions>
-    </div>
+    </BookingStepShell>
   )
 }

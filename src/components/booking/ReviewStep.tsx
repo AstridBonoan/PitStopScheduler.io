@@ -5,6 +5,7 @@ import { createAppointment, fetchServices } from '@/services/bookingService'
 import { TIME_SLOTS } from '@/lib/constants'
 import type { Service } from '@/types/database'
 import { formatCurrency } from '@/lib/utils'
+import { BookingStepShell } from '@/components/booking/BookingStepShell'
 import { BookingStickyActions } from '@/components/booking/BookingStickyActions'
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
@@ -45,7 +46,18 @@ export function ReviewStep({
   const dateLabel = draft.date ? format(parseISO(draft.date), 'EEEE, MMMM d, yyyy') : ''
 
   return (
-    <div>
+    <BookingStepShell
+      actions={
+        <BookingStickyActions className="flex gap-3">
+          <Button variant="outline" className="flex-1" size="lg" onClick={onBack} disabled={submitting}>
+            Edit
+          </Button>
+          <Button className="flex-1" size="lg" solidDisabled loading={submitting} onClick={handleSubmit}>
+            Confirm booking
+          </Button>
+        </BookingStickyActions>
+      }
+    >
       <h1 className="text-2xl font-bold text-slate-900">Review your booking</h1>
       <p className="mt-1 text-slate-500">Confirm everything looks correct before submitting.</p>
 
@@ -90,15 +102,6 @@ export function ReviewStep({
           {error}
         </p>
       ) : null}
-
-      <BookingStickyActions className="flex gap-3">
-        <Button variant="outline" className="flex-1" size="lg" onClick={onBack} disabled={submitting}>
-          Edit
-        </Button>
-        <Button className="flex-1" size="lg" solidDisabled loading={submitting} onClick={handleSubmit}>
-          Confirm booking
-        </Button>
-      </BookingStickyActions>
-    </div>
+    </BookingStepShell>
   )
 }

@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { useBooking } from '@/contexts/BookingContext'
 import { vehicleSchema, type VehicleFormData } from '@/lib/validators'
 import { Input } from '@/components/ui/Input'
+import { BookingStepShell } from '@/components/booking/BookingStepShell'
 import { BookingStickyActions } from '@/components/booking/BookingStickyActions'
 import { Button } from '@/components/ui/Button'
 
@@ -23,7 +24,19 @@ export function VehicleStep({ onNext, onBack }: { onNext: () => void; onBack: ()
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <BookingStepShell
+      actions={
+        <BookingStickyActions className="flex gap-3">
+          <Button type="button" variant="outline" className="flex-1" size="lg" onClick={onBack}>
+            Back
+          </Button>
+          <Button type="submit" form="vehicle-step-form" className="flex-1" size="lg" solidDisabled>
+            Continue
+          </Button>
+        </BookingStickyActions>
+      }
+    >
+      <form id="vehicle-step-form" onSubmit={handleSubmit(onSubmit)}>
       <h1 className="text-2xl font-bold text-slate-900">Vehicle details</h1>
       <p className="mt-1 text-slate-500">Tell us about the vehicle coming in for service.</p>
 
@@ -53,15 +66,7 @@ export function VehicleStep({ onNext, onBack }: { onNext: () => void; onBack: ()
           placeholder="ABC-1234"
         />
       </div>
-
-      <BookingStickyActions className="flex gap-3">
-        <Button type="button" variant="outline" className="flex-1" size="lg" onClick={onBack}>
-          Back
-        </Button>
-        <Button type="submit" className="flex-1" size="lg" solidDisabled>
-          Continue
-        </Button>
-      </BookingStickyActions>
-    </form>
+      </form>
+    </BookingStepShell>
   )
 }

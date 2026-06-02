@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { useBooking } from '@/contexts/BookingContext'
 import { customerSchema, type CustomerFormData } from '@/lib/validators'
 import { Input } from '@/components/ui/Input'
+import { BookingStepShell } from '@/components/booking/BookingStepShell'
 import { BookingStickyActions } from '@/components/booking/BookingStickyActions'
 import { Button } from '@/components/ui/Button'
 
@@ -23,7 +24,19 @@ export function CustomerStep({ onNext, onBack }: { onNext: () => void; onBack: (
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <BookingStepShell
+      actions={
+        <BookingStickyActions className="flex gap-3">
+          <Button type="button" variant="outline" className="flex-1" size="lg" onClick={onBack}>
+            Back
+          </Button>
+          <Button type="submit" form="customer-step-form" className="flex-1" size="lg" solidDisabled>
+            Review booking
+          </Button>
+        </BookingStickyActions>
+      }
+    >
+      <form id="customer-step-form" onSubmit={handleSubmit(onSubmit)}>
       <h1 className="text-2xl font-bold text-slate-900">Your information</h1>
       <p className="mt-1 text-slate-500">We will send confirmations and reminders to this contact.</p>
 
@@ -63,15 +76,7 @@ export function CustomerStep({ onNext, onBack }: { onNext: () => void; onBack: (
           ) : null}
         </div>
       </div>
-
-      <BookingStickyActions className="flex gap-3">
-        <Button type="button" variant="outline" className="flex-1" size="lg" onClick={onBack}>
-          Back
-        </Button>
-        <Button type="submit" className="flex-1" size="lg" solidDisabled>
-          Review booking
-        </Button>
-      </BookingStickyActions>
-    </form>
+      </form>
+    </BookingStepShell>
   )
 }

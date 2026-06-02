@@ -21,16 +21,20 @@ function BookWizard() {
   }
 
   return (
-    <div>
+    <div
+      className="flex max-md:max-h-[calc(100dvh-var(--header-height)-var(--bottom-nav-total))] max-md:min-h-[calc(100dvh-var(--header-height)-var(--bottom-nav-total))] flex-col md:min-h-0 md:max-h-none"
+    >
       <BookingProgress current={step} />
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={step}
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: -20 }}
-          transition={{ duration: 0.2 }}
-        >
+      <div className="flex min-h-0 flex-1 flex-col">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={step}
+            className="flex min-h-0 flex-1 flex-col"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -20 }}
+            transition={{ duration: 0.2 }}
+          >
           {step === 0 && <ServiceStep onNext={() => go(1)} />}
           {step === 1 && <DateStep onBack={() => go(0)} onNext={() => go(2)} />}
           {step === 2 && <TimeStep onBack={() => go(1)} onNext={() => go(3)} />}
@@ -45,8 +49,9 @@ function BookWizard() {
               }}
             />
           )}
-        </motion.div>
-      </AnimatePresence>
+          </motion.div>
+        </AnimatePresence>
+      </div>
     </div>
   )
 }

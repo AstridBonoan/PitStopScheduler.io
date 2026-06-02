@@ -15,6 +15,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { useBooking } from '@/contexts/BookingContext'
 import { fetchBlockedDates, fetchHolidays, isDateBookable } from '@/services/bookingService'
 import { cn } from '@/lib/utils'
+import { BookingStepShell } from '@/components/booking/BookingStepShell'
 import { BookingStickyActions } from '@/components/booking/BookingStickyActions'
 import { Button } from '@/components/ui/Button'
 
@@ -38,7 +39,18 @@ export function DateStep({ onNext, onBack }: { onNext: () => void; onBack: () =>
   }, [month])
 
   return (
-    <div>
+    <BookingStepShell
+      actions={
+        <BookingStickyActions className="flex gap-3">
+          <Button variant="outline" className="flex-1" size="lg" onClick={onBack}>
+            Back
+          </Button>
+          <Button className="flex-1" size="lg" solidDisabled disabled={!draft.date} onClick={onNext}>
+            Continue
+          </Button>
+        </BookingStickyActions>
+      }
+    >
       <h1 className="text-2xl font-bold text-slate-900">Choose a date</h1>
       <p className="mt-1 text-slate-500">Only available dates can be selected.</p>
 
@@ -102,15 +114,6 @@ export function DateStep({ onNext, onBack }: { onNext: () => void; onBack: () =>
           })}
         </div>
       </div>
-
-      <BookingStickyActions className="flex gap-3">
-        <Button variant="outline" className="flex-1" size="lg" onClick={onBack}>
-          Back
-        </Button>
-        <Button className="flex-1" size="lg" solidDisabled disabled={!draft.date} onClick={onNext}>
-          Continue
-        </Button>
-      </BookingStickyActions>
-    </div>
+    </BookingStepShell>
   )
 }

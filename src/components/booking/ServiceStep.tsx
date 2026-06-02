@@ -5,6 +5,7 @@ import type { Service } from '@/types/database'
 import { fetchServices } from '@/services/bookingService'
 import { useBooking } from '@/contexts/BookingContext'
 import { formatCurrency, cn } from '@/lib/utils'
+import { BookingStepShell } from '@/components/booking/BookingStepShell'
 import { BookingStickyActions } from '@/components/booking/BookingStickyActions'
 import { Button } from '@/components/ui/Button'
 
@@ -18,7 +19,15 @@ export function ServiceStep({ onNext }: { onNext: () => void }) {
   }, [])
 
   return (
-    <div>
+    <BookingStepShell
+      actions={
+        <BookingStickyActions>
+          <Button className="w-full" size="lg" solidDisabled disabled={!draft.serviceId} onClick={onNext}>
+            Continue
+          </Button>
+        </BookingStickyActions>
+      }
+    >
       <h1 className="text-2xl font-bold text-slate-900">Select a service</h1>
       <p className="mt-1 text-slate-500">Choose the service your vehicle needs today.</p>
 
@@ -63,12 +72,6 @@ export function ServiceStep({ onNext }: { onNext: () => void }) {
           ))
         )}
       </div>
-
-      <BookingStickyActions>
-        <Button className="w-full" size="lg" solidDisabled disabled={!draft.serviceId} onClick={onNext}>
-          Continue
-        </Button>
-      </BookingStickyActions>
-    </div>
+    </BookingStepShell>
   )
 }

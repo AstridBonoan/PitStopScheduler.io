@@ -10,11 +10,10 @@
   --color-surface: #ffffff;
   --color-muted: #64748b;
   --color-border: #e2e8f0;
-  /* Bottom nav: py-2 + 52px row + safe area + breathing room above nav */
-  --bottom-nav-height: 4.5rem;
-  --booking-actions-bottom: calc(
-    var(--bottom-nav-height) + env(safe-area-inset-bottom, 0px) + 0.5rem
-  );
+  /* Layout: header 4rem; nav = py-2 + 52px row + home-indicator padding on nav */
+  --header-height: 4rem;
+  --bottom-nav-inner: 4.25rem;
+  --bottom-nav-total: calc(var(--bottom-nav-inner) + env(safe-area-inset-bottom, 0px));
 }
 
 @layer base {
