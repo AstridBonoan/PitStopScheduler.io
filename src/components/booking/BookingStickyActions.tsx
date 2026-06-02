@@ -14,8 +14,9 @@ export function BookingStickyActions({
       className={cn(
         'shrink-0',
         '-mx-4 border-t border-slate-200 bg-white px-4 pt-3 pb-2',
+        'max-md:mb-[var(--booking-cta-gap)]',
         'shadow-[0_-4px_16px_rgba(15,23,42,0.08)]',
-        'md:mx-0 md:mt-8 md:border-0 md:bg-transparent md:p-0 md:shadow-none',
+        'md:mx-0 md:mb-0 md:mt-8 md:border-0 md:bg-transparent md:p-0 md:shadow-none',
         className,
       )}
     >

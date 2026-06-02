@@ -22,7 +22,7 @@ function BookWizard() {
 
   return (
     <div
-      className="flex max-md:max-h-[calc(100dvh-var(--header-height)-var(--bottom-nav-total))] max-md:min-h-[calc(100dvh-var(--header-height)-var(--bottom-nav-total))] flex-col md:min-h-0 md:max-h-none"
+      className="flex max-md:max-h-[var(--booking-panel-height)] max-md:min-h-[var(--booking-panel-height)] flex-col md:min-h-0 md:max-h-none"
     >
       <BookingProgress current={step} />
       <div className="flex min-h-0 flex-1 flex-col">
